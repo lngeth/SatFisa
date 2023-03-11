@@ -5,6 +5,15 @@ Devoir réalisé sous **Python**.
 
 ## Installation du projet
 
+### Programme SAT
+
+Utilisation de **Glucose**.  
+Pour l'installer avec Choco, exécuter la commande suivante en terminal:  
+
+```shell
+choco install glucose
+```
+
 ### Librairies requis
 
 ```python
