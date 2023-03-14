@@ -5,3 +5,9 @@ def startProgram():
 
 def endProgram():
     print("\nFin du programme...")
+
+def print_dimacs(head, clauses):
+    print("To Dimacs format :")
+    print(head)
+    for c in clauses:
+        print(c)

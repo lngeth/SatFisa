@@ -24,29 +24,19 @@ while(True):
     try:
       g = GraphSAT(line)
 
-      # draw Graph
-      print("To Dimacs format :")
-
       # write Dimacs format into txt files
-      head, clauses = g.get_dimacs_clauses()
-      f = open("data/SAT_in.txt", mode="w")
-      f.write(head + "\n")
-      f.close()
-      f = open("data/SAT_in.txt", mode="a")
-      for c in clauses:
-        f.write(c + "\n")
-      f.close()
-      
-      f = open("data/SAT_in.txt", mode="r")
-      print(f.read())
-      f.close()
+      head, clauses = g.get_dimacs_clauses(export_to="data/SAT_in.txt")
+      print_dimacs(head, clauses)
 
       # run glucose
       glucose = Glucose("data/SAT_in.txt")
       res = glucose.run()
       print(res)
 
-      # g.draw_graph_sat()
+      print("Afficher le graph avec Networkx ? (y/n)")
+      line = input()
+      if (line == "y"):
+        g.draw_graph_sat()
     except Exception as e:
        print("Erreur :", e)
        print("(Format voulu : nb_noeuds nb_aretes n1 n2 ...)")

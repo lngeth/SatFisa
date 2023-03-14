@@ -33,8 +33,10 @@ class GraphSAT:
       list_edge.append((graph_tab[i], graph_tab[i+1]))
     self.__list_edge = list_edge
   
-  def get_dimacs_clauses(self):
-    """Convert the Graph object into Dimacs format"""
+  def get_dimacs_clauses(self, export_to=""):
+    """Convert the Graph object into Dimacs format
+    export_to correspond to the path of the output file
+    """
     nb_node = self.__nb_node
     list_variable = np.arange(1, (nb_node*3)+1)
 
@@ -66,6 +68,20 @@ class GraphSAT:
       list_clause.append(s)
 
     head = "p cnf {} {}".format(nb_node*3, len(list_clause))
+
+    # export to output file
+    if (export_to != ""):
+      # erase everything first
+      f = open(export_to, mode="w")
+      f.write(head + "\n")
+      f.close()
+
+      # write the current SAT problem
+      f = open(export_to, mode="a")
+      for c in list_clause:
+        f.write(c + "\n")
+      f.close()
+
     return (head, list_clause)
 
   def draw_graph_sat(self):
