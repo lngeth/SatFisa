@@ -6,6 +6,7 @@ import re
 # Import tools class
 from interface.logs import *
 from draw.graph import *
+from glucose import *
 
 import subprocess # to run bash command
 
@@ -41,14 +42,9 @@ while(True):
       f.close()
 
       # run glucose
-      bash_command = "glucose -model data/SAT_in.txt"
-      process = subprocess.Popen(bash_command.split(), stdout=subprocess.PIPE)
-      output, error = process.communicate()
-      output = output.decode("utf-8")
-      # extract the result only
-      res = re.search(r's\s[A-Z]{0,3}SATISFIABLE', output)
-      output = output[res.start():]
-      print(output.strip())
+      glucose = Glucose("data/SAT_in.txt")
+      res = glucose.run()
+      print(res)
 
       # g.draw_graph_sat()
     except Exception as e:

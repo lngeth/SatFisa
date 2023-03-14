@@ -35,3 +35,12 @@ Dans le **dossier SatFisa**, exécuter dans votre terminal la commande suivante 
 ```bash
 make
 ```
+
+## Exercices
+
+### 3.
+
+Exécuter l'algorithmes sur les 3 graphes (copier-coller directement) :
+- 6 10 1 2 1 4 1 5 2 3 2 4 3 4 3 6 4 5 4 6 5 6
+- 10 15 1 2 1 5 1 9 2 3 2 4 3 6 3 10 10 8 10 9 9 7 7 4 4 8 5 6 6 7 5 8
+- 12 24 1 2 1 3 1 5 1 11 2 4 2 6 2 12 12 8 12 10 12 11 11 9 11 7 3 4 3 8 3 10 4 7 4 9 5 8 5 10 5 7 6 8 6 7 6 9 9 10
