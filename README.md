@@ -18,8 +18,6 @@ choco install glucose
 
 ```python
 numpy
-matplotlib
-networkx (pour la visualisation)
 ```
 
 Si vous ne possédez pas toutes les librairies ci-dessus, exécuter la commande suivante, **dans le dossier SatFisa**, pour les installer :

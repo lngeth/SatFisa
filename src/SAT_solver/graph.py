@@ -1,5 +1,3 @@
-import networkx as nx
-import matplotlib.pyplot as plt
 import numpy as np
 
 class GraphSAT:
@@ -126,12 +124,3 @@ class GraphSAT:
           colored_graph.append(self.COLORS[v_c])
           break
     return colored_graph
-
-  def draw_graph_sat(self):
-    """Draw the Graph with Networkx"""
-    G = nx.Graph()
-    G.add_nodes_from(np.arange(1, self.__nb_node + 1))
-    G.add_edges_from(self.__list_edge)
-    pos = nx.shell_layout(G)
-    nx.draw(G, pos, with_labels=True, node_size=2000)
-    plt.show()

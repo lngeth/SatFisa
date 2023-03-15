@@ -1,16 +1,15 @@
 # Import libraries
 import numpy as np
-import networkx as nx
 import re
 
 # Import tools class
-from interface.logs import *
-from draw.graph import *
-from glucose import *
+from SAT_solver.graph import *
+from SAT_solver.glucose import *
 
 import subprocess # to run bash command
 
-startProgram()
+print("Bonjour ! DM SAT logique\nVeuillez entrer le graph souhaité :")
+print("('exit' pour sortir)\n")
 
 line = ""
 while(True):
@@ -18,56 +17,48 @@ while(True):
     line = input()
     print("Graph : {}\n".format(line))
     if (line == "exit"):
-        break
+      break
     
     # format line to graph
     try:
       g = GraphSAT(line)
 
-      # write Dimacs format into txt files
-      head, clauses = g.get_dimacs_clauses(export_to="data/SAT_in.txt")
-      print_dimacs(head, clauses)
-
-      # run glucose
       glucose = Glucose("data/SAT_in.txt")
-      res = glucose.fit()
-      if (res[0]):
-        print("SATISFIABLE 3 couleurs ! \n{}".format(res[1]))
+      res = []
 
-        # print the 3-coloriable graph
-        print("\nExercice 3 : 3-coloriable")
-        colored_3graph = g.get_Ncolor_graph(res[1])
-        for i in range(len(colored_3graph)):
-           print("Noeud {} : {}".format(i+1, colored_3graph[i]))
-      else:
-        print("UNSATISFIABLE 3 couleurs !")
+      while True:
+        # write Dimacs format into txt files
+        head, clauses = g.get_dimacs_clauses(export_to="data/SAT_in.txt")
+        
+        # print the Dimacs format
+        print("To Dimacs format :")
+        print(head)
+        for c in clauses:
+          print(c)
 
-        # print the 4-coloriable graph
-        print("\nContinue sur 4 couleurs (exercice 4) ? ([y]/n)")
-        line = input()
-        if (line == "y" or line == ""):
-          g.nb_color = 4
-          head, clauses = g.get_dimacs_clauses(export_to="data/SAT_in.txt")
-          print_dimacs(head, clauses)
+        # run glucose
+        res = glucose.fit()
 
-          res = glucose.fit()
-          if (res[0]):
-            print("SATISFIABLE 4 couleurs ! \n{}".format(res[1]))
+        # if UNSAT, try with 1 more color (4 color max: Theorem 4-color)
+        if (res[0] == False):
+          print("UNSATISFIABLE pour {} couleurs...\n".format(g.nb_color))
+          g.nb_color += 1
+        else:
+          break
 
-            colored_4graph = g.get_Ncolor_graph(res[1])
-            for i in range(len(colored_4graph)):
-              print("Noeud {} : {}".format(i+1, colored_4graph[i]))
+      print("SATISFIABLE avec {} couleurs !\n{}".format(g.nb_color, res[1]))
 
-      print("\nAfficher le graph avec Networkx ? ([y]/n)")
-      line = input()
-      if (line == "y" or line == ""):
-        g.draw_graph_sat()
+      # print the n-coloriable graph
+      print("\nExercice {0} : {0} couleurs nécessaires !".format(g.nb_color))
+      colored_ngraph = g.get_Ncolor_graph(res[1])
+      for i in range(len(colored_ngraph)):
+        print("Noeud {} : {}".format(i+1, colored_ngraph[i]))
 
     except Exception as e:
-       print("Erreur :", e)
-       print("(Format voulu : nb_noeuds nb_aretes n1 n2 ...)")
-       print("Veuillez réessayer : ")
+      print("Erreur :", e)
+      print("(Format voulu : nb_noeuds nb_aretes n1 n2 ...)")
+      print("Veuillez réessayer : ")
     else:
       break
 
-endProgram()
+print("\nFin du programme...")
