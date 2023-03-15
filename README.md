@@ -4,6 +4,8 @@ Réalisé par **Laurent NGETH** et **Christophe WANG**.
 Devoir Maison du module de Logique SAT FISA 1A S2.  
 Devoir réalisé sous **Python**.
 
+Lien au GitHub du projet (visible à partir de la date du rendu 17/03/2023) : https://github.com/lngeth/SatFisa
+
 ## Installation du projet
 
 ### Programme SAT
