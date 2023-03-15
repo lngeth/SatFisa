@@ -2,10 +2,17 @@ import re
 import subprocess # to run bash command
 
 class Glucose:
+  """Represent the object that is use to execute Glucose command
+
+  Attributes:
+    __file: the relative path to the txt file containing the SAT problem in DIMACS format
+  """
   def __init__(self, file):
     self.__file = file
   
   def fit(self):
+    """Execute the Glucose command with the corresponding txt file
+    """
     # run glucose
     bash_command = "glucose -model " + self.__file
     process = subprocess.Popen(bash_command.split(), stdout=subprocess.PIPE)
