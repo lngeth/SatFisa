@@ -1,5 +1,6 @@
 # SatFisa
 
+Réalisé par **Laurent NGETH** et **Christophe WANG**.
 Devoir Maison du module de Logique SAT FISA 1A S2.  
 Devoir réalisé sous **Python**.
 
@@ -23,7 +24,10 @@ numpy
 Si vous ne possédez pas toutes les librairies ci-dessus, exécuter la commande suivante, **dans le dossier SatFisa**, pour les installer :
 
 ```bash
+# sous windows
 make init
+# sous linux, avec PIP
+make linux-init
 ```
 
 ### Lancer le programme
@@ -31,7 +35,10 @@ make init
 Dans le **dossier SatFisa**, exécuter dans votre terminal la commande suivante :  
 
 ```bash
+# sous windows
 make
+# sous linux
+make linux
 ```
 
 ## Exercices
